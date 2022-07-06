@@ -1,13 +1,19 @@
 package players;
 
-import java.util.Objects;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Doctor {
     private String firstName;
     private String lastName;
     private String specialization;
     private static int idCounter = 0;
 
+    @EqualsAndHashCode.Include
     private int id = generateId();
 
     public Doctor(String firstName, String lastName, String specialization) {
@@ -16,48 +22,8 @@ public class Doctor {
         this.specialization = specialization;
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getSpecialization() {
-        return specialization;
-    }
-
     public static synchronized Integer generateId() {
         return idCounter++;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Doctor doctor = (Doctor) o;
-        return id == doctor.id;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
 }
