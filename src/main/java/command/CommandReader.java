@@ -36,15 +36,15 @@ public class CommandReader {
     /**
      * Доступные команды:
      * "Создать пациента <Кличка>"
-     * "Удалить доктора <ID_доктора>"
+     * "Создать прием <ID_пациента> <ID_доктора> <ГГГГ-ММ-ДД>", при создании приема, статус устанавливается "Новый" автоматически.
      * "Создать доктора <Имя> <Фамилия> <Специальность>"
+     * "Удалить доктора <ID_доктора>"
      * "Удалить прием <ID_приема>"
      * "Удалить пациента <ID_пациента>", вводим id пациента, которого надо удалить.
      * "Вывести всех пациентов", можно добавить ключи для фильтрации "-f" и сортировки "-s"
      * "Вывести всех докторов"
-     * "Сменить кличку <ID_пациента> <Новая_кличка>"
-     * "Создать прием <ID_пациента> <ID_доктора> <ГГГГ-ММ-ДД>", при создании приема, статус устанавливается "Новый" автоматически.
      * "Вывести все приемы <ID_пациента>"
+     * "Сменить кличку <ID_пациента> <Новая_кличка>"
      * "Сменить статус приема <ID_приема> <Новый_статус>", статус можно выбрать из ограниченного набора.
      * "Выйти"
      */
@@ -69,6 +69,9 @@ public class CommandReader {
         if (commandString.contains("Создать доктора")) {
             return CommandType.CREATE_DOCTOR;
         }
+        if (commandString.contains("Создать прием")) {
+            return CommandType.CREATE_RECEPTION;
+        }
         if (commandString.contains("Удалить пациента")) {
             return CommandType.REMOVE_PATIENT;
         }
@@ -81,17 +84,14 @@ public class CommandReader {
         if (commandString.contains("Вывести всех пациентов")) {
             return CommandType.WRITE_ALL_PATIENTS;
         }
-        if (commandString.contains("Сменить кличку")) {
-            return CommandType.CHANGE_NAME;
-        }
-        if (commandString.contains("Создать прием")) {
-            return CommandType.CREATE_RECEPTION;
-        }
         if (commandString.contains("Вывести все приемы")) {
             return CommandType.WRITE_ALL_RECEPTIONS;
         }
         if (commandString.contains("Вывести всех докторов")) {
             return CommandType.WRITE_ALL_DOCTORS;
+        }
+        if (commandString.contains("Сменить кличку")) {
+            return CommandType.CHANGE_NAME;
         }
         if (commandString.contains("Сменить статус приема")) {
             return CommandType.CHANGE_STATUS;
