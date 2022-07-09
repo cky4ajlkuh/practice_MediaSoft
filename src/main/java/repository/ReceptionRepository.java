@@ -11,4 +11,5 @@ public interface ReceptionRepository {
 
     void changeStatus(Reception reception, String status);
 
+    void remove(Reception reception);
 }

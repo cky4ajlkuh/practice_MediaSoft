@@ -4,10 +4,12 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
+
 @Getter
 @Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class Doctor {
+public class Doctor implements Serializable {
     private String firstName;
     private String lastName;
     private String specialization;

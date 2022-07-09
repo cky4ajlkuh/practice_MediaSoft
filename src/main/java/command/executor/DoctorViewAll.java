@@ -5,7 +5,7 @@ import players.Doctor;
 
 public class DoctorViewAll extends AbstractExecutor {
     @Override
-    public int execute(String text) {
+    public int execute(String command) {
         return viewAllDoctors();
     }
 

@@ -9,11 +9,11 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
-public class ReceptionCreate extends AbstractExecutor {
+public class ReceptionCreated extends AbstractExecutor {
 
     @Override
-    public int execute(String text) {
-        return createReception(text);
+    public int execute(String command) {
+        return createReception(command);
     }
 
     private int createReception(String command) {

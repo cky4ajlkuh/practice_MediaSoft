@@ -8,4 +8,6 @@ public interface DoctorRepository {
     Set<Doctor> getDoctors();
 
     void save(Doctor doctor);
+
+    void remove(Doctor doctor);
 }

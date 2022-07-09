@@ -1,4 +1,6 @@
-package entrance;
+package authentication;
+
+import context.UserContext;
 
 import java.util.Scanner;
 
@@ -17,6 +19,7 @@ public class Authentication {
             String password = scanner.nextLine();
             if (login.equals(LOGIN) && password.equals(PASSWORD)) {
                 isSuccessfully = true;
+                UserContext.setUserLogin(login);
                 System.out.println("Вы вошли!");
                 break;
             } else {

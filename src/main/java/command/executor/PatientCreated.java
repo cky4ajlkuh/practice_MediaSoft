@@ -1,9 +1,10 @@
 package command.executor;
 
 import command.CommandType;
+import context.UserContext;
 import players.Patient;
 
-public class PatientCreate extends AbstractExecutor {
+public class PatientCreated extends AbstractExecutor {
     @Override
     public int execute(String text) {
         return createPatient(text);
@@ -12,7 +13,7 @@ public class PatientCreate extends AbstractExecutor {
     private int createPatient(String command) {
         String[] words = command.split(" ");
         try {
-            patientRepository.save(new Patient(words[2]));
+            patientRepository.save(new Patient(words[2], UserContext.getUserLogin()));
             System.out.println("Пациент создан!");
         } catch (Exception exception) {
             System.out.println("Проверьте правильность команды: Создать пациента <Кличка>");

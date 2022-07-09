@@ -3,10 +3,10 @@ package command.executor;
 import command.CommandType;
 import players.Doctor;
 
-public class DoctorCreate extends AbstractExecutor {
+public class DoctorCreated extends AbstractExecutor {
     @Override
-    public int execute(String text) {
-        return createDoctor(text);
+    public int execute(String command) {
+        return createDoctor(command);
     }
 
     @Override

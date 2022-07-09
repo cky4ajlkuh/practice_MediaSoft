@@ -7,8 +7,8 @@ import java.util.Optional;
 
 public class PatientChangeName extends AbstractExecutor {
     @Override
-    public int execute(String text) {
-        return changeName(text);
+    public int execute(String command) {
+        return changeName(command);
     }
 
     private int changeName(String command) {

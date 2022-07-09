@@ -5,11 +5,11 @@ import players.Patient;
 
 import java.util.Optional;
 
-public class PatientRemove extends AbstractExecutor {
+public class PatientRemoved extends AbstractExecutor {
 
     @Override
-    public int execute(String text) {
-        return removePatient(text);
+    public int execute(String command) {
+        return removePatient(command);
     }
 
     private int removePatient(String command) {
@@ -30,6 +30,6 @@ public class PatientRemove extends AbstractExecutor {
 
     @Override
     public CommandType getCommandType() {
-        return CommandType.DELETE_PATIENT;
+        return CommandType.REMOVE_PATIENT;
     }
 }

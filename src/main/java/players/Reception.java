@@ -4,10 +4,12 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
+
 @Getter
 @Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class Reception {
+public class Reception implements Serializable {
 
     @EqualsAndHashCode.Include
     private int id = generateId();

@@ -1,5 +1,6 @@
 package entrance;
 
+import authentication.Authentication;
 import command.CommandReader;
 
 public class Main {

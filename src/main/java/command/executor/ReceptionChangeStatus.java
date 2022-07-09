@@ -8,8 +8,8 @@ import java.util.Optional;
 
 public class ReceptionChangeStatus extends AbstractExecutor {
     @Override
-    public int execute(String text) {
-        return changeStatus(text);
+    public int execute(String command) {
+        return changeStatus(command);
     }
 
     private int changeStatus(String command) {

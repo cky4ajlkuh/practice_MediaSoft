@@ -8,8 +8,8 @@ import java.util.Optional;
 
 public class ReceptionViewAll extends AbstractExecutor {
     @Override
-    public int execute(String text) {
-        return viewAllReceptions(text);
+    public int execute(String command) {
+        return viewAllReceptions(command);
     }
 
     private int viewAllReceptions(String command) {
@@ -33,6 +33,6 @@ public class ReceptionViewAll extends AbstractExecutor {
 
     @Override
     public CommandType getCommandType() {
-        return CommandType.WRITE_ALL_RECEPTION;
+        return CommandType.WRITE_ALL_RECEPTIONS;
     }
 }
