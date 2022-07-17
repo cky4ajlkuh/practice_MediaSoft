@@ -15,9 +15,16 @@ public class Patient implements Serializable {
     private String name;
     private final String emailOwner;
     @EqualsAndHashCode.Include
-    private final int id;
+    private int id;
 
     private final String formattedDate;
+
+    public Patient(String name, String emailOwner) {
+        this.name = name;
+        this.emailOwner = emailOwner;
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        formattedDate = formatter.format(Date.from(Instant.now()));
+    }
 
     public Patient(int id, String name, String emailOwner) {
         this.id = id;

@@ -12,8 +12,7 @@ import java.io.Serializable;
 public class Reception implements Serializable {
 
     @EqualsAndHashCode.Include
-    private int id = generateId();
-    private static int idCounter = 0;
+    private int id;
     private int patientId;
     private int doctorId;
     private String status;
@@ -26,8 +25,11 @@ public class Reception implements Serializable {
         this.date = date;
     }
 
-    public static synchronized Integer generateId() {
-        return idCounter++;
+    public Reception(int id, int patientId, int doctorId, String status, String date) {
+        this.id = id;
+        this.patientId = patientId;
+        this.doctorId = doctorId;
+        this.status = status;
+        this.date = date;
     }
-
 }

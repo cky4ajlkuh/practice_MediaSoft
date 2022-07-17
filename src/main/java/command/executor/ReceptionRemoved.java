@@ -22,7 +22,7 @@ public class ReceptionRemoved extends AbstractExecutor {
                 System.out.println("Прием не найден");
             }
         } catch (Exception exception) {
-            System.out.println("Проверьте правильность команды: Удалить Прием <ID>");
+            throw new RuntimeException(exception);
         }
         return 1;
     }

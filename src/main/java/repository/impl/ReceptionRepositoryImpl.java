@@ -1,20 +1,17 @@
 package repository.impl;
 
+import config.ApplicationDataSource;
+import lombok.SneakyThrows;
 import players.Reception;
 import repository.ReceptionRepository;
 
-import java.io.*;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.Set;
 
 public class ReceptionRepositoryImpl implements ReceptionRepository {
-
-    private static final String FILE_NAME = "receptions.txt";
-    private static final Set<Reception> RECEPTIONS = new HashSet<>();
-
-    static {
-        loadDataToFile();
-    }
 
     private static final ReceptionRepositoryImpl SINGLETON = new ReceptionRepositoryImpl();
 
@@ -26,48 +23,60 @@ public class ReceptionRepositoryImpl implements ReceptionRepository {
         return SINGLETON;
     }
 
-    private static void saveDataToFile() {
-        try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(FILE_NAME))) {
-            outputStream.writeObject(RECEPTIONS);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    private static void loadDataToFile() {
-        try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(FILE_NAME))) {
-            Set<Reception> loadedReceptions = (Set<Reception>) inputStream.readObject();
-            RECEPTIONS.addAll(loadedReceptions);
-        } catch (FileNotFoundException e) {
-            //
-        } catch (IOException | ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     @Override
     public Set<Reception> getReceptions() {
-        return RECEPTIONS;
+        try (PreparedStatement statement = ApplicationDataSource.getConnection().prepareStatement("select * from reception")) {
+            ResultSet set = statement.executeQuery();
+            return mapResultSetToPatient(set);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @SneakyThrows
+    private static Set<Reception> mapResultSetToPatient(ResultSet set) {
+        Set<Reception> receptions = new HashSet<>();
+        while (set.next()) {
+            int id = set.getInt("id");
+            int patientId = set.getInt("patientId");
+            int doctorId = set.getInt("doctorId");
+            String status = set.getString("status");
+            String date = String.valueOf(set.getDate("date"));
+            receptions.add(new Reception(id, patientId, doctorId, status, date));
+        }
+        return receptions;
     }
 
     @Override
     public void save(Reception reception) {
-        RECEPTIONS.add(reception);
-        saveDataToFile();
+        try (PreparedStatement statement = ApplicationDataSource.getConnection()
+                .prepareStatement("insert into reception (patientId, doctorId, status, date) values (" +
+                        reception.getPatientId() + ", " + reception.getDoctorId() + ", '" + reception.getStatus() +
+                        "', '" + reception.getDate() + "')")) {
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
     public void changeStatus(Reception reception, String status) {
-        RECEPTIONS.remove(reception);
-        reception.setStatus(status);
-        RECEPTIONS.add(reception);
-        saveDataToFile();
+        try (PreparedStatement statement = ApplicationDataSource.getConnection()
+                .prepareStatement("UPDATE reception SET status = '" + status + "' where id = " + reception.getId())) {
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
     public void remove(Reception reception) {
-        RECEPTIONS.remove(reception);
-        saveDataToFile();
+        try (PreparedStatement statement = ApplicationDataSource.getConnection()
+                .prepareStatement("delete from reception where id = " + reception.getId())) {
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }

@@ -24,12 +24,23 @@ public class PatientRepositoryImpl implements PatientRepository {
 
     @Override
     public void save(Patient patient) {
-
+        try (PreparedStatement statement = ApplicationDataSource.getConnection()
+                .prepareStatement("insert into patient (name, emailOwner) values ('" + patient.getName() + "', '" +
+                        patient.getEmailOwner() + "')")) {
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
     public void remove(Patient patient) {
-
+        try (PreparedStatement statement = ApplicationDataSource.getConnection()
+                .prepareStatement("delete from patient where id = " + patient.getId())) {
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
@@ -56,6 +67,11 @@ public class PatientRepositoryImpl implements PatientRepository {
 
     @Override
     public void changeName(Patient patient, String name) {
-
+        try (PreparedStatement statement = ApplicationDataSource.getConnection()
+                .prepareStatement("UPDATE patient SET name = '" + name + "' where id = " + patient.getId())) {
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

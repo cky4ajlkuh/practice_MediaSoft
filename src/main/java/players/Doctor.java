@@ -13,10 +13,8 @@ public class Doctor implements Serializable {
     private String firstName;
     private String lastName;
     private String specialization;
-    private static int idCounter = 0;
-
     @EqualsAndHashCode.Include
-    private int id = generateId();
+    private int id;
 
     public Doctor(String firstName, String lastName, String specialization) {
         this.firstName = firstName;
@@ -24,8 +22,10 @@ public class Doctor implements Serializable {
         this.specialization = specialization;
     }
 
-    public static synchronized Integer generateId() {
-        return idCounter++;
+    public Doctor(int id, String firstName, String lastName, String specialization) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.specialization = specialization;
     }
-
 }

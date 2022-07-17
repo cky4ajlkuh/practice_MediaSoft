@@ -23,7 +23,7 @@ public class PatientRemoved extends AbstractExecutor {
                 System.out.println("Пациент не найден");
             }
         } catch (Exception exception) {
-            System.out.println("Проверьте правильность команды: Удалить пациента <ID>");
+            throw new RuntimeException(exception);
         }
         return 1;
     }

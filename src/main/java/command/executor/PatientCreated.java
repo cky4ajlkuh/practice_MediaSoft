@@ -13,10 +13,10 @@ public class PatientCreated extends AbstractExecutor {
     private int createPatient(String command) {
         String[] words = command.split(" ");
         try {
-            patientRepository.save(new Patient(2, words[2], UserContext.getUserLogin()));
+            patientRepository.save(new Patient(words[2], UserContext.getUserLogin()));
             System.out.println("Пациент создан!");
         } catch (Exception exception) {
-            System.out.println("Проверьте правильность команды: Создать пациента <Кличка>");
+            throw new RuntimeException(exception);
         }
         return 1;
     }

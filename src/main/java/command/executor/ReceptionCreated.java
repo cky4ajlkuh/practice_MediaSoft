@@ -29,7 +29,7 @@ public class ReceptionCreated extends AbstractExecutor {
                 System.out.println("Некорректный ввод данных!");
             }
         } catch (Exception exception) {
-            System.out.println("Проверьте правильность команды: Создать прием <ID_пациента> <ID_доктора> <ГГГГ-ММ-ДД>");
+            throw new RuntimeException(exception);
         }
         return 1;
     }

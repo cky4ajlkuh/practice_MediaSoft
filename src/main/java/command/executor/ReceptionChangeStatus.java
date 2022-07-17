@@ -27,8 +27,8 @@ public class ReceptionChangeStatus extends AbstractExecutor {
             } else {
                 System.out.println("Прием не найден!");
             }
-        } catch (Exception e) {
-            System.out.println("Проверьте правильность команды: Сменить статус приема <ID_приема> <Новый_статус>");
+        } catch (Exception exception) {
+            throw new RuntimeException(exception);
         }
         return 1;
     }

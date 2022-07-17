@@ -1,7 +1,6 @@
 package command.executor;
 
 import command.CommandType;
-import context.UserContext;
 import players.Patient;
 
 import java.util.ArrayList;
@@ -17,16 +16,10 @@ public class PatientViewAll extends AbstractExecutor {
 
     private int viewAllPatients(String command) {
         List<Patient> patients = new ArrayList<>(patientRepository.getPatients());
-        if (command.contains("-f")) {
+        if (command.contains("-ф")) {
             patients = patients
                     .stream()
-                    .filter(patient -> patient.getEmailOwner().equals(UserContext.getUserLogin()))
-                    .collect(Collectors.toList());
-        }
-        if (command.contains("-s")) {
-            patients = patients
-                    .stream()
-                    .sorted(Comparator.comparing(Patient::getFormattedDate))
+                    .sorted(Comparator.comparing(Patient::getId))
                     .collect(Collectors.toList());
         }
         for (Patient patient : patients) {

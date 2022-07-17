@@ -1,20 +1,17 @@
 package repository.impl;
 
+import config.ApplicationDataSource;
+import lombok.SneakyThrows;
 import players.Doctor;
 import repository.DoctorRepository;
 
-import java.io.*;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.Set;
 
 public class DoctorRepositoryImpl implements DoctorRepository {
-    private static final String FILE_NAME = "doctors.txt";
-    private static final Set<Doctor> DOCTORS = new HashSet<>();
-
-    static {
-        loadDataToFile();
-    }
-
     private static final DoctorRepositoryImpl SINGLETON = new DoctorRepositoryImpl();
 
     private DoctorRepositoryImpl() {
@@ -24,39 +21,48 @@ public class DoctorRepositoryImpl implements DoctorRepository {
         return SINGLETON;
     }
 
-    private static void saveDataToFile() {
-        try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(FILE_NAME))) {
-            outputStream.writeObject(DOCTORS);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    private static void loadDataToFile() {
-        try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(FILE_NAME))) {
-            Set<Doctor> loadedDoctors = (Set<Doctor>) inputStream.readObject();
-            DOCTORS.addAll(loadedDoctors);
-        } catch (FileNotFoundException e) {
-            //
-        } catch (IOException | ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     @Override
     public Set<Doctor> getDoctors() {
-        return DOCTORS;
+        try (PreparedStatement statement = ApplicationDataSource.getConnection().prepareStatement("select * from doctor")) {
+            ResultSet set = statement.executeQuery();
+            return mapResultSetToPatient(set);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @SneakyThrows
+    private static Set<Doctor> mapResultSetToPatient(ResultSet set) {
+        Set<Doctor> doctors = new HashSet<>();
+        while (set.next()) {
+            int id = set.getInt("id");
+            String firstName = set.getString("firstName");
+            String lastName = set.getString("lastName");
+            String specialization = set.getString("specialization");
+            doctors.add(new Doctor(id, firstName, lastName, specialization));
+        }
+        return doctors;
     }
 
     @Override
-    public void save(Doctor newDoctor) {
-        DOCTORS.add(newDoctor);
-        saveDataToFile();
+    public void save(Doctor doctor) {
+        try (PreparedStatement statement = ApplicationDataSource.getConnection()
+                .prepareStatement("insert into doctor (firstName, lastName, specialization) values ('"
+                        + doctor.getFirstName() + "', '" +
+                        doctor.getLastName() + "', '" + doctor.getSpecialization() + "')")) {
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
     public void remove(Doctor doctor) {
-        DOCTORS.remove(doctor);
-        saveDataToFile();
+        try (PreparedStatement statement = ApplicationDataSource.getConnection()
+                .prepareStatement("delete from doctor where id = " + doctor.getId())) {
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
