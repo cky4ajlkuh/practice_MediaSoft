@@ -14,17 +14,21 @@ public class ReceptionChangeStatus extends AbstractExecutor {
 
     private int changeStatus(String command) {
         String[] words = command.split(" ");
-        Optional<Reception> receptionToChange = findReception(Integer.parseInt(words[3]));
-        if (receptionToChange.isPresent()) {
-            try {
-                StatusType.valueOf(words[4]);
-                receptionRepository.changeStatus(receptionToChange.get(), words[4]);
-                System.out.println("Статус приема изменен!");
-            } catch (Exception exception) {
-                System.out.println("Неверный статус или команда! Варианты статусов: Новый, Ожидает, Проходит, Оплачен, Отменен");
+        try {
+            Optional<Reception> receptionToChange = findReception(Integer.parseInt(words[3]));
+            if (receptionToChange.isPresent()) {
+                try {
+                    StatusType.valueOf(words[4]);
+                    receptionRepository.changeStatus(receptionToChange.get(), words[4]);
+                    System.out.println("Статус приема изменен!");
+                } catch (Exception exception) {
+                    System.out.println("Неверный статус или команда! Варианты статусов: Новый, Ожидает, Проходит, Оплачен, Отменен");
+                }
+            } else {
+                System.out.println("Прием не найден!");
             }
-        } else {
-            System.out.println("Прием не найден!");
+        } catch (Exception e) {
+            System.out.println("Проверьте правильность команды: Сменить статус приема <ID_приема> <Новый_статус>");
         }
         return 1;
     }

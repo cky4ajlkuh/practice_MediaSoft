@@ -11,25 +11,19 @@ import java.util.Date;
 
 @Setter
 @Getter
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Patient implements Serializable {
     private String name;
     private final String emailOwner;
-    private final int id = generateId();
-
     @EqualsAndHashCode.Include
-    private final String formattedDate;
-    private static int idCounter = 0;
+    private final int id;
 
-    public Patient(String name, String emailOwner) {
+    private final String formattedDate;
+
+    public Patient(int id, String name, String emailOwner) {
+        this.id = id;
         this.name = name;
         this.emailOwner = emailOwner;
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         formattedDate = formatter.format(Date.from(Instant.now()));
     }
-
-    public static synchronized Integer generateId() {
-        return idCounter++;
-    }
-
 }
