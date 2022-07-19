@@ -39,7 +39,9 @@ public class DoctorRepositoryImpl implements DoctorRepository {
             String firstName = set.getString("firstName");
             String lastName = set.getString("lastName");
             String specialization = set.getString("specialization");
-            doctors.add(new Doctor(id, firstName, lastName, specialization));
+            Doctor doctor = new Doctor(firstName, lastName, specialization);
+            doctor.setId(id);
+            doctors.add(doctor);
         }
         return doctors;
     }

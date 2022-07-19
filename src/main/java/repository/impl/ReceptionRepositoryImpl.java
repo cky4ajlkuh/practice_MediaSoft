@@ -42,7 +42,9 @@ public class ReceptionRepositoryImpl implements ReceptionRepository {
             int doctorId = set.getInt("doctorId");
             String status = set.getString("status");
             String date = String.valueOf(set.getDate("date"));
-            receptions.add(new Reception(id, patientId, doctorId, status, date));
+            Reception reception = new Reception(patientId, doctorId, status, date);
+            reception.setId(id);
+            receptions.add(reception);
         }
         return receptions;
     }

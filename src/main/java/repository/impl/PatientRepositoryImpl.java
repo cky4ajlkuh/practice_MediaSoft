@@ -60,7 +60,9 @@ public class PatientRepositoryImpl implements PatientRepository {
             int id = set.getInt("id");
             String name = set.getString("name");
             String emailOwner = set.getString("emailOwner");
-            patients.add(new Patient(id, name, emailOwner));
+            Patient patient = new Patient(name, emailOwner);
+            patient.setId(id);
+            patients.add(patient);
         }
         return patients;
     }

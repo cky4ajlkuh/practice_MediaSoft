@@ -21,11 +21,4 @@ public class Doctor implements Serializable {
         this.lastName = lastName;
         this.specialization = specialization;
     }
-
-    public Doctor(int id, String firstName, String lastName, String specialization) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.specialization = specialization;
-    }
 }

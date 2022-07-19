@@ -24,12 +24,4 @@ public class Reception implements Serializable {
         this.status = status;
         this.date = date;
     }
-
-    public Reception(int id, int patientId, int doctorId, String status, String date) {
-        this.id = id;
-        this.patientId = patientId;
-        this.doctorId = doctorId;
-        this.status = status;
-        this.date = date;
-    }
 }
