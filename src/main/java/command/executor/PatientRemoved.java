@@ -4,7 +4,7 @@ import command.CommandType;
 import players.Patient;
 
 import java.util.Optional;
-
+/*
 public class PatientRemoved extends AbstractExecutor {
 
     @Override
@@ -33,3 +33,4 @@ public class PatientRemoved extends AbstractExecutor {
         return CommandType.REMOVE_PATIENT;
     }
 }
+*/

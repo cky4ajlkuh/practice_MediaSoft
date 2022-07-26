@@ -9,7 +9,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-
+/*
 public class ReceptionViewAll extends AbstractExecutor {
     @Override
     public int execute(String command) {
@@ -47,3 +47,4 @@ public class ReceptionViewAll extends AbstractExecutor {
         return CommandType.WRITE_ALL_RECEPTIONS;
     }
 }
+*/

@@ -8,7 +8,7 @@ import players.Reception;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Optional;
-
+/*
 public class ReceptionCreated extends AbstractExecutor {
 
     @Override
@@ -39,3 +39,4 @@ public class ReceptionCreated extends AbstractExecutor {
         return CommandType.CREATE_RECEPTION;
     }
 }
+*/

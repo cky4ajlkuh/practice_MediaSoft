@@ -13,10 +13,10 @@ import repository.impl.ReceptionRepositoryImpl;
 import java.util.Optional;
 
 public abstract class AbstractExecutor implements Executor {
-    protected final PatientRepository patientRepository = PatientRepositoryImpl.getSingleton();
+    //protected final PatientRepository patientRepository = PatientRepositoryImpl.getSingleton();
     protected final DoctorRepository doctorRepository = DoctorRepositoryImpl.getSingleton();
     protected final ReceptionRepository receptionRepository = ReceptionRepositoryImpl.getSingleton();
-
+/*
     protected Optional<Patient> findPatient(int id) {
         for (Patient patient : patientRepository.getPatients()) {
             if (patient.getId() == id) {
@@ -25,7 +25,7 @@ public abstract class AbstractExecutor implements Executor {
         }
         return Optional.empty();
     }
-
+*/
     protected Optional<Doctor> findDoctor(int id) {
         for (Doctor doctor : doctorRepository.getDoctors()) {
             if (doctor.getId() == id) {

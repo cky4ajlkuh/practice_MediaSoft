@@ -2,6 +2,7 @@ package repository.impl;
 
 import config.ApplicationDataSource;
 import lombok.SneakyThrows;
+import org.springframework.stereotype.Repository;
 import players.Patient;
 import repository.PatientRepository;
 
@@ -11,16 +12,8 @@ import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.Set;
 
+@Repository
 public class PatientRepositoryImpl implements PatientRepository {
-
-    private static final PatientRepositoryImpl SINGLETON = new PatientRepositoryImpl();
-
-    private PatientRepositoryImpl() {
-    }
-
-    public static PatientRepository getSingleton() {
-        return SINGLETON;
-    }
 
     @Override
     public void save(Patient patient) {

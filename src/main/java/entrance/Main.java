@@ -1,11 +1,12 @@
 package entrance;
 
-import authentication.Authentication;
-import command.CommandReader;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+@SpringBootApplication
 public class Main {
     public static void main(String[] args) {
-        Authentication.authenticate();
-        CommandReader.startReadCommand();
+        SpringApplication.run(Main.class);
+        //CommandReader.startReadCommand();
     }
 }

@@ -3,7 +3,7 @@ package command.executor;
 import command.CommandType;
 import context.UserContext;
 import players.Patient;
-
+/*
 public class PatientCreated extends AbstractExecutor {
     @Override
     public int execute(String text) {
@@ -26,3 +26,4 @@ public class PatientCreated extends AbstractExecutor {
         return CommandType.CREATE_PATIENT;
     }
 }
+*/

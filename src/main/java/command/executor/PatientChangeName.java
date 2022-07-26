@@ -4,7 +4,7 @@ import command.CommandType;
 import players.Patient;
 
 import java.util.Optional;
-
+/*
 public class PatientChangeName extends AbstractExecutor {
     @Override
     public int execute(String command) {
@@ -33,3 +33,4 @@ public class PatientChangeName extends AbstractExecutor {
         return null;
     }
 }
+*/

@@ -20,17 +20,17 @@ public class CommandReader {
     }
 
     private static final Map<CommandType, Executor> COMMAND_EXECUTORS_GROUPED_BY_COMMAND = Map.ofEntries(
-            Map.entry(CommandType.CREATE_PATIENT, new PatientCreated()),
+            //Map.entry(CommandType.CREATE_PATIENT, new PatientCreated()),
             Map.entry(CommandType.CREATE_DOCTOR, new DoctorCreated()),
-            Map.entry(CommandType.CREATE_RECEPTION, new ReceptionCreated()),
-            Map.entry(CommandType.REMOVE_PATIENT, new PatientRemoved()),
+           // Map.entry(CommandType.CREATE_RECEPTION, new ReceptionCreated()),
+           // Map.entry(CommandType.REMOVE_PATIENT, new PatientRemoved()),
             Map.entry(CommandType.REMOVE_DOCTOR, new DoctorRemoved()),
             Map.entry(CommandType.REMOVE_RECEPTION, new ReceptionRemoved()),
-            Map.entry(CommandType.WRITE_ALL_PATIENTS, new PatientViewAll()),
+         //   Map.entry(CommandType.WRITE_ALL_PATIENTS, new PatientViewAll()),
             Map.entry(CommandType.WRITE_ALL_DOCTORS, new DoctorViewAll()),
-            Map.entry(CommandType.WRITE_ALL_RECEPTIONS, new ReceptionViewAll()),
-            Map.entry(CommandType.CHANGE_STATUS, new ReceptionChangeStatus()),
-            Map.entry(CommandType.CHANGE_NAME, new PatientChangeName())
+          //  Map.entry(CommandType.WRITE_ALL_RECEPTIONS, new ReceptionViewAll()),
+            Map.entry(CommandType.CHANGE_STATUS, new ReceptionChangeStatus())
+         //   Map.entry(CommandType.CHANGE_NAME, new PatientChangeName())
     );
 
     /**
